@@ -1,0 +1,14 @@
+<!ELEMENT artikellist (artikel*)>
+<!ELEMENT artikel (artnr, artbez?, mge?, preis?, kuehl, edat?)>
+<!ELEMENT artnr (#PCDATA)>
+<!ATTLIST artnr DT CDATA #FIXED "number">
+<!ELEMENT artbez (#PCDATA)>
+<!ATTLIST artbez DT CDATA #FIXED "varchar2(30)">
+<!ELEMENT mge (#PCDATA)>
+<!ATTLIST mge DT CDATA #FIXED "varchar2(30)">
+<!ELEMENT preis (#PCDATA)>
+<!ATTLIST preis DT CDATA #FIXED "number(8,2)">
+<!ELEMENT kuehl (#PCDATA)>
+<!ATTLIST kuehl DT CDATA #FIXED "varchar2(2)">
+<!ELEMENT edat (#PCDATA)>
+<!ATTLIST edat DT CDATA #FIXED "date">

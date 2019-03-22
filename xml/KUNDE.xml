@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE UPDATES SYSTEM "KUNDE.dtd">
+<UPDATES>
+    <UPKUNDE KNR="1" USP="KKLIMIT" DTUSP="number(8,2)" UWERT="500" />
+    <UPKUNDE KNR="2" USP="PLZ" DTUSP="number(5)" UWERT="55779" />
+    <UPKUNDE KNR="1" USP="KNAME" DTUSP="varchar2(20)" UWERT="Schnösel" />
+    <UPKUNDE KNR="4" USP="KKLIMIT" DTUSP="number(8,2)" UWERT="1000" />
+    <UPKUNDE KNR="5" USP="KKLIMIT" DTUSP="number(8,2)" UWERT="0" />
+</UPDATES>
