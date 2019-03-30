@@ -9,41 +9,48 @@ import org.xml.sax.SAXException;
 
 public class InsertArtikelContentHandler extends ContentHandlerAdapter {
 
-    // Schreibweisen als Konstante festhalten (Änderbarkeit)
-    public static final String ARTIKEL = "artikel";
+    private static final int TABLE = 1, COLUMN = 2;
+
+    private int level = 0;
 
     // Inhalt für Spaltennamen und Werte
     private StringBuilder col = new StringBuilder(), val = new StringBuilder();
-    private String datatype;
+    private String datatype, table;
 
     @Override
     // Spaltennamen in col speichern und Datentyp festhalten
     // Wenn das Element "Artikel" ist, zwichenspeicher leeren
     public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException {
 
-        datatype = atts.getValue("DT");
-
-        if (qName.equals(ARTIKEL)) {
+        if (level == TABLE) {
             // Zwichenspeicher leeren
             col = new StringBuilder();
             val = new StringBuilder();
-        } else {
+            table = qName;
+        } else if (level == COLUMN) {
+            datatype = atts.getValue("DT");
+
             // , setzen, falls nicht das 1. Element
             if (col.length() != 0) {
                 col.append(", ");
                 val.append(", ");
             }
+
             col.append(qName);
         }
+
+        level++;
     }
 
     @Override
     // Vollständigen insert in die Datenbank schreiben
     public void endElement(String uri, String localName, String qName) throws SAXException {
 
-        if (qName.equals(ARTIKEL)) {
+        level--;
+        
+        if (level == TABLE) {
             try (Statement sm = getCon().createStatement()) {
-                String stmnt = "insert into artikel(" + col.toString() + ") values(" + val.toString() + ")";
+                String stmnt = "insert into " + table + "(" + col.toString() + ") values(" + val.toString() + ")";
                 sm.executeUpdate(stmnt);
                 System.out.println(stmnt + ";");
             } catch (SQLException ex) {
