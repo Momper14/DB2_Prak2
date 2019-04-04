@@ -41,17 +41,12 @@ public class UpdateKundeContentHandler extends ContentHandlerAdapter {
         level++;
     }
 
-    @Override
-    public void endElement(String uri, String localName, String qName) throws SAXException {
-        level--;
-    }
-
     private void selectKunde(Statement sm, String knr) {
 
         try {
             ResultSet rs = sm.executeQuery("SELECT * FROM KUNDE WHERE KNR=" + knr);
             ResultSetMetaData rsm = rs.getMetaData();
-            ArrayList<String> columnName = new ArrayList<String>();
+            ArrayList<String> columnName = new ArrayList<>();
             for (int i = 1; i <= rsm.getColumnCount(); i++) {
                 columnName.add(rsm.getColumnName(i));
             }

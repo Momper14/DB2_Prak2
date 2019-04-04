@@ -13,6 +13,7 @@ import org.xml.sax.SAXException;
 public abstract class ContentHandlerAdapter implements ContentHandler {
 
     private Connection con;
+    private int level = 0;
 
     @Override
     // Nichts
@@ -52,11 +53,13 @@ public abstract class ContentHandlerAdapter implements ContentHandler {
     @Override
     // Nichts
     public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException {
+        level++;
     }
 
     @Override
     // Nichts
     public void endElement(String uri, String localName, String qName) throws SAXException {
+        level--;
     }
 
     @Override
@@ -92,6 +95,11 @@ public abstract class ContentHandlerAdapter implements ContentHandler {
             return "TO_DATE('" + str + "','DD.MM.YYYY')";
         } else {
             return str;
+
         }
+    }
+
+    public int getLevel() {
+        return level;
     }
 }

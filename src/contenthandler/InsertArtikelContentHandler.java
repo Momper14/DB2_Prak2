@@ -11,8 +11,6 @@ public class InsertArtikelContentHandler extends ContentHandlerAdapter {
 
     private static final int TABLE = 1, COLUMN = 2;
 
-    private int level = 0;
-
     // Inhalt für Spaltennamen und Werte
     private StringBuilder col = new StringBuilder(), val = new StringBuilder();
     private String datatype, table;
@@ -22,12 +20,12 @@ public class InsertArtikelContentHandler extends ContentHandlerAdapter {
     // Wenn das Element "Artikel" ist, zwichenspeicher leeren
     public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException {
 
-        if (level == TABLE) {
+        if (getLevel() == TABLE) {
             // Zwichenspeicher leeren
             col = new StringBuilder();
             val = new StringBuilder();
             table = qName;
-        } else if (level == COLUMN) {
+        } else if (getLevel() == COLUMN) {
             datatype = atts.getValue("DT");
 
             // , setzen, falls nicht das 1. Element
@@ -39,16 +37,16 @@ public class InsertArtikelContentHandler extends ContentHandlerAdapter {
             col.append(qName);
         }
 
-        level++;
+        super.startElement(uri, localName, qName, atts);
     }
 
     @Override
     // Vollständigen insert in die Datenbank schreiben
     public void endElement(String uri, String localName, String qName) throws SAXException {
 
-        level--;
-        
-        if (level == TABLE) {
+        super.endElement(uri, localName, qName);
+
+        if (getLevel() == TABLE) {
             try (Statement sm = getCon().createStatement()) {
                 String stmnt = "insert into " + table + "(" + col.toString() + ") values(" + val.toString() + ")";
                 sm.executeUpdate(stmnt);
