@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>8</x>
+      <y>56</y>
+      <w>472</w>
+      <h>232</h>
+    </coordinates>
+    <panel_attributes>ContentHandlerAdapter
+--
+-con: Connection
+-level: int
+--
++setDocumentLocator(locator: Locator): void
++startDocument(): void
++endDocument(): void
++startPrefixMapping(prefix: String, uri: String): void
++endPrefixMapping(prefix: String): void
++startElement(uri: String, localName: String, qName: String, atts: Attributes): void
++endElement(uri: String, localName: String, qName: String): void
++characters(ch: char[], start: int, length: int): void
++ignorableWhitespace(ch: char[], start: int, length: int): void
++processingInstruction(target: String, data: String): void
++skippedEntity(name: String): void
++getCon(): Connection
++strToVal(datatype: String, str: String): String
++getLevel(): int
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>8</x>
+      <y>8</y>
+      <w>232</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>ConnectionCreator
+--
+--
+_/+createOracleConnection(): Connection/_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>8</x>
+      <y>304</y>
+      <w>472</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>InsertArtikelContentHandler
+--
+_-TABLE: String_
+_-COLUMN: String_
+-col: StringBuilder
+-val: StringBuilder
+--
++startElement(uri: String, localName: String, qName: String, atts: Attributes): void
++endElement(uri: String, localName: String, qName: String): void
++characters(ch: char[], start: int, length: int): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>496</x>
+      <y>304</y>
+      <w>472</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>UpdateKundeContentHandler
+--
+_-UPKUNDE: String_
+--
++startElement(uri: String, localName: String, qName: String, atts: Attributes): void
++selectKunde(sm: Statement, knr: String): void
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>8</x>
+      <y>456</y>
+      <w>240</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>MyErrorHandler
+--
+--
++warning(ep: SAXParseException): void
++error(ep: SAXParseException): void
++fatalError(ep: SAXParseException): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>264</x>
+      <y>456</y>
+      <w>360</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Main
+--
+--
+_+main(args[]: String): void_
+_+delArtikel(): void_
+_+parseXML(file: String, contentHandler: ContentHandler): void_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>472</x>
+      <y>176</y>
+      <w>248</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;290.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>248</x>
+      <y>280</y>
+      <w>24</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>232</x>
+      <y>8</y>
+      <w>272</w>
+      <h>464</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;320.0;20.0;320.0;560.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>232</x>
+      <y>32</y>
+      <w>80</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>416</y>
+      <w>64</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>536</x>
+      <y>416</y>
+      <w>64</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>232</x>
+      <y>424</y>
+      <w>48</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;20.0;40.0;20.0;40.0;40.0</additional_attributes>
+  </element>
+</diagram>
