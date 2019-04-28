@@ -89,13 +89,13 @@ public abstract class ContentHandlerAdapter implements ContentHandler {
     // passt den String für das Einfügen in die Datenbank an anhand des Datentyps (z.b. banane -> 'banane')
     public String strToVal(String datatype, String str) {
         // Unterscheidung in Typen, da angabe unterschiedlich
-        if (datatype.toLowerCase().contains("char")) {
-            return "'" + str + "'";
-        } else if (datatype.toLowerCase().equals("date")) {
-            return "TO_DATE('" + str + "','DD.MM.YYYY')";
-        } else {
-            return str;
-
+        switch (datatype.toLowerCase()) {
+            case "string":
+                return "'" + str + "'";
+            case "date":
+                return "TO_DATE('" + str + "','YYYY-MM-DD')";
+            default:
+                return str;
         }
     }
 

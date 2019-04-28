@@ -4,12 +4,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.validation.TypeInfoProvider;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 public class InsertArtikelContentHandler extends ContentHandlerAdapter {
 
     private static final int TABLE = 1, COLUMN = 2;
+    
+    private final TypeInfoProvider tip;
+    
+    public InsertArtikelContentHandler(TypeInfoProvider tip){
+        this.tip = tip;
+    }
 
     // Inhalt für Spaltennamen und Werte
     private StringBuilder col = new StringBuilder(), val = new StringBuilder();
@@ -26,7 +33,7 @@ public class InsertArtikelContentHandler extends ContentHandlerAdapter {
             val = new StringBuilder();
             table = qName;
         } else if (getLevel() == COLUMN) {
-            datatype = atts.getValue("DT");
+            datatype = tip.getElementTypeInfo().getTypeName();
 
             // , setzen, falls nicht das 1. Element
             if (col.length() != 0) {

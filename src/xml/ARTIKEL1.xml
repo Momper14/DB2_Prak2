@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<artikellist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="ARTIKEL1.xsd">
+    <artikel>
+        <artnr>1</artnr>
+        <artbez>Milch</artbez>
+        <mge>1 Liter</mge>
+        <preis>1.99</preis>
+        <kuehl>KS</kuehl>
+        <edat>2002-02-02</edat>
+    </artikel>
+    <artikel>
+        <artnr>2</artnr>
+        <artbez>Avocado</artbez>
+        <mge>STK</mge>
+        <preis>4.99</preis>
+        <kuehl>NK</kuehl>
+        <edat>2005-05-01</edat>
+    </artikel>
+    <artikel>
+        <artnr>3</artnr>
+        <artbez>Spinat</artbez>
+        <mge>250 gr</mge>
+        <preis>2.99</preis>
+        <kuehl>TK</kuehl>
+        <edat>2012-12-12</edat>
+    </artikel>
+    <artikel>
+        <artnr>4</artnr>
+        <artbez>Sojamilch</artbez>
+        <mge>Liter</mge>
+        <preis>1.99</preis>
+        <kuehl>NK</kuehl>
+        <edat>2010-01-13</edat>
+    </artikel>
+    <artikel>
+        <artnr>5</artnr>
+        <artbez>Mais</artbez>
+        <mge>100 gr</mge>
+        <preis>0.99</preis>
+        <kuehl>NK</kuehl>
+        <edat>1999-03-07</edat>
+    </artikel>
+</artikellist>
