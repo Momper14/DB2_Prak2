@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:complexType name="besta">
+    <xs:sequence>
+      <xs:element name="artnr" type="xs:nonNegativeInteger" />
+      <xs:element name="menge" type="xs:nonNegativeInteger" />
+      <xs:element name="wert" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="artlist">
+    <xs:sequence>
+      <xs:element name="besta" minOccurs="0" maxOccurs="unbounded" type="besta" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="bestellunglist">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="bestellung" minOccurs="1" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="bstnr" type="xs:nonNegativeInteger" />
+              <xs:element name="knr" type="xs:nonNegativeInteger" />
+              <xs:element name="status" type="xs:integer" />
+              <xs:element name="rsum" type="xs:decimal" />
+              <xs:element name="bestdat" type="xs:date" />
+              <xs:element name="liefdat" type="xs:date" />
+              <xs:element name="rechdat" type="xs:date" />
+              <xs:element name="artlist" minOccurs="0" type="artlist" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bestellunglist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BESTELLAT.xsd">
+
+    <bestellung>
+        <bstnr>1</bstnr>
+        <knr>1</knr>
+        <status>1</status>
+        <rsum>139.99</rsum>
+        <bestdat>2003-12-15</bestdat>
+        <liefdat>2003-12-20</liefdat>
+        <rechdat>2003-12-27</rechdat>
+        <artlist>
+            <besta>
+                <artnr>3</artnr>
+                <menge>5</menge>
+                <wert>20.0</wert>
+            </besta>
+            <besta>
+                <artnr>4</artnr>
+                <menge>2</menge>
+                <wert>10.0</wert>
+            </besta>
+            <besta>
+                <artnr>1</artnr>
+                <menge>1</menge>
+                <wert>19.99</wert>
+            </besta>
+        </artlist>
+    </bestellung>
+
+    <bestellung>
+        <bstnr>2</bstnr>
+        <knr>1</knr>
+        <status>2</status>
+        <rsum>109.99</rsum>
+        <bestdat>2005-12-15</bestdat>
+        <liefdat>2005-12-20</liefdat>
+        <rechdat>2005-12-27</rechdat>
+        <artlist>
+            <besta>
+                <artnr>3</artnr>
+                <menge>5</menge>
+                <wert>10.0</wert>
+            </besta>
+            <besta>
+                <artnr>4</artnr>
+                <menge>2</menge>
+                <wert>20.0</wert>
+            </besta>
+            <besta>
+                <artnr>1</artnr>
+                <menge>1</menge>
+                <wert>19.99</wert>
+            </besta>
+        </artlist>
+    </bestellung>
+
+</bestellunglist>

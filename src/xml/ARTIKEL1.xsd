@@ -3,7 +3,7 @@
   <xs:element name="artikellist">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="artikel" minOccurs="1"  maxOccurs="unbounded">
+        <xs:element name="artikel" minOccurs="1" maxOccurs="unbounded">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="artnr" type="xs:nonNegativeInteger" />

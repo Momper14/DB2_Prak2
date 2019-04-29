@@ -1,6 +1,8 @@
 package main;
 
+import connection.ConnectionCreator;
 import contenthandler.InsertArtikelContentHandler;
+import contenthandler.InsertBestellAtContentHandler;
 import errorhandler.MyErrorHandler;
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,6 +10,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Array;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Struct;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
@@ -32,8 +40,10 @@ public class Main {
         do {
             System.out.println("");
             System.out.println("Bitte wählen Sie einen der folgenden Menüpunkte");
-            System.out.println("(4) XML Insert auf Artikel");
-            System.out.println("(5) XML Update auf Kunde");
+            System.out.println("(1) XML Insert auf Artikel");
+            System.out.println("(2) XML Insert auf BestellAt");
+            System.out.println("(3) Select auf BestellAt");
+            System.out.println("(4) Lösche inhalt von BestellAt");
             System.out.println("(0) Beenden");
             System.out.println("");
 
@@ -44,14 +54,28 @@ public class Main {
             }
 
             switch (choise) {
-                case 4:
+                case 1: {
                     ValidatorHandler validatorHandler = createValidatorHandler("ARTIKEL1.xsd");
                     ContentHandler contentHandler = new InsertArtikelContentHandler(validatorHandler.getTypeInfoProvider());
                     validatorHandler.setContentHandler(contentHandler);
                     parseXML("xml/ARTIKEL1.xml", validatorHandler);
                     break;
-                case 5:
+                }
+                case 2: {
+                    ValidatorHandler validatorHandler = createValidatorHandler("BESTELLAT.xsd");
+                    ContentHandler contentHandler = new InsertBestellAtContentHandler(validatorHandler.getTypeInfoProvider());
+                    validatorHandler.setContentHandler(contentHandler);
+                    parseXML("xml/BESTELLAT.xml", validatorHandler);
                     break;
+                }
+                case 3: {
+                    selectOnBestellAt();
+                    break;
+                }
+                case 4: {
+                    delBestellAt();
+                    break;
+                }
                 case 0:
                     System.out.println("Auf Wiedersehen");
                     System.exit(0);
@@ -60,6 +84,15 @@ public class Main {
                     System.out.println("Ungültige eingabe");
             }
         } while (true);
+    }
+
+    private static void delBestellAt() {
+        try (Connection con = ConnectionCreator.createOracleConnection(); Statement sm = con.createStatement()) {
+            sm.execute("delete from BESTELLAT2");
+            System.out.println("Alle Bestellungen gelöscht.");
+        } catch (SQLException ex) {
+            Logger.getLogger(InsertArtikelContentHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private static void parseXML(String file, ValidatorHandler validatorHandler) {
@@ -82,5 +115,34 @@ public class Main {
     private static ValidatorHandler createValidatorHandler(String schema) throws SAXException, IOException {
         SchemaFactory schemaFactory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
         return schemaFactory.newSchema(new File(schema)).newValidatorHandler();
+    }
+
+    private static void selectOnBestellAt() {
+        String format = "%-25s%-15s%-15s%n";
+
+        try (Connection con = ConnectionCreator.createOracleConnection(); Statement sm = con.createStatement()) {
+            ResultSet rs = sm.executeQuery("SELECT * FROM BESTELLAT2");
+            while (rs.next()) {
+                System.out.println("");
+                System.out.print("Bestellnummer: " + rs.getString("BSTNR"));
+                System.out.print('\t');
+                System.out.print("Kundennummer: " + rs.getString("KNR"));
+                System.out.print('\t');
+                System.out.print("Rechnungsnummer: " + rs.getString("RSUM"));
+                System.out.println("");
+                Object[] artList = (Object[]) rs.getArray("ARTLIST").getArray();
+                for (Object bestA : artList) {
+                    Object[] values = ((Struct) bestA).getAttributes();
+                    System.out.print('\t');
+                    try (Statement stmtTmp = con.createStatement()) {
+                        ResultSet rsArt = stmtTmp.executeQuery("SELECT ARTBEZ FROM ARTIKEL WHERE ARTNR = " + values[0]);
+                        rsArt.next();
+                        System.out.printf(format, "Artikel: " + rsArt.getString("ARTBEZ"), "Menge: " + values[1], "Wert: " + values[2]);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InsertArtikelContentHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

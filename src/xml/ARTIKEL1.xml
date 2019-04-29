@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<artikellist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:noNamespaceSchemaLocation="ARTIKEL1.xsd">
+<artikellist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ARTIKEL1.xsd">
     <artikel>
         <artnr>1</artnr>
         <artbez>Milch</artbez>
