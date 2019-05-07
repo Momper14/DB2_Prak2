@@ -10,7 +10,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -88,7 +87,7 @@ public class Main {
 
     private static void delBestellAt() {
         try (Connection con = ConnectionCreator.createOracleConnection(); Statement sm = con.createStatement()) {
-            sm.execute("delete from BESTELLAT2");
+            sm.execute("delete from BESTELLAT");
             System.out.println("Alle Bestellungen gelöscht.");
         } catch (SQLException ex) {
             Logger.getLogger(InsertArtikelContentHandler.class.getName()).log(Level.SEVERE, null, ex);
@@ -121,7 +120,7 @@ public class Main {
         String format = "%-25s%-15s%-15s%n";
 
         try (Connection con = ConnectionCreator.createOracleConnection(); Statement sm = con.createStatement()) {
-            ResultSet rs = sm.executeQuery("SELECT * FROM BESTELLAT2");
+            ResultSet rs = sm.executeQuery("SELECT * FROM BESTELLAT");
             while (rs.next()) {
                 System.out.println("");
                 System.out.print("Bestellnummer: " + rs.getString("BSTNR"));

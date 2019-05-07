@@ -1,0 +1,9 @@
+Konstruktor, welcher ein TypeInfoProvider als Parameter hat, erstellt
+public InsertArtikelContentHandler(TypeInfoProvider tip){
+    this.tip = tip;
+}
+
+Holen des Datentypen angepasst
+datatype = tip.getElementTypeInfo().getTypeName();
+
+Anpassung der Switch-Case's für die gegebenen Datentyp-Namen

@@ -20,7 +20,7 @@ public class InsertBestellAtContentHandler extends ContentHandlerAdapter {
 
     // Inhalt für Spaltennamen und Werte
     private StringBuilder val = new StringBuilder();
-    private String datatype, table = "BESTELLAT2";
+    private String datatype, table = "BESTELLAT";
     private boolean noCom = true;
 
     @Override
