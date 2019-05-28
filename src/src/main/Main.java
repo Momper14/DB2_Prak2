@@ -107,7 +107,8 @@ public class Main {
         } catch (FileNotFoundException ex) {
             System.err.println(ex.getMessage());
         } catch (SAXException | IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
+            //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
